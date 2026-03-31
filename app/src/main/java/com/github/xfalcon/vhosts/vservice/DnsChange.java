@@ -122,10 +122,13 @@ public class DnsChange {
                     } catch (Exception e) {
                         continue;
                     }
-                    if (ip.contains(":")) {
-                        DOMAINS_IP_MAPS6.put(matcher.group(3).trim() + ".", ip);
-                    } else {
-                        DOMAINS_IP_MAPS4.put(matcher.group(3).trim() + ".", ip);
+                    String[] domains = matcher.group(3).trim().split("\\s+");
+                    for (String domain : domains) {
+                        if (ip.contains(":")) {
+                            DOMAINS_IP_MAPS6.put(domain + ".", ip);
+                        } else {
+                            DOMAINS_IP_MAPS4.put(domain + ".", ip);
+                        }
                     }
                 }
             }
